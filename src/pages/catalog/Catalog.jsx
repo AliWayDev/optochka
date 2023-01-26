@@ -3,12 +3,11 @@ import React, { useEffect, useState } from "react";
 import { CategoryItem } from "../../components/category-item/CategoryItem";
 import { Layout } from "../../components/layout/Layout";
 import { Loader } from "../../components/Loader/Loader";
-import { Modal } from "../../components/modal/Modal";
 import "../catalog/Catalog.scss";
 
 export const Catalog = () => {
   const [catalog, setCatalog] = useState([]);
-  const [len, setLen] = useState([]);
+  const [, setLen] = useState([]);
 
   const getCatalog = async () => {
     const config = {
@@ -60,7 +59,7 @@ export const Catalog = () => {
     <Layout>
       <div className="catalog">
         <p>Categories:</p>
-
+ 
         {catalogs}
       </div>
       {/* <Modal title='Ibrat aka trash' info='trash' /> */}
