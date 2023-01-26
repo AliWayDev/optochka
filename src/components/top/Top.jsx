@@ -20,7 +20,7 @@ export const Top = () => {
     } else {
       setSearch(false);
     }
-  }, [window.location.pathname]);
+  }, []);
 
   const setStyle = () => {
     if (!disabled) {

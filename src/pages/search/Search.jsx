@@ -9,10 +9,12 @@ export const Search = () => {
   const [product, setProduct] = useState([]);
   const [search, setSearch] = useState("");
 
+  const brandId = localStorage.getItem('brand')
+
   const getProducts = async () => {
     const config = {
       method: "get",
-      url: `https://dev-upost.mollys.uz/products?brandId=${193}&name=${search}`,
+      url: `https://dev-upost.mollys.uz/products?brandId=${brandId}&name=${search}`,
       headers: {
         Authorization:
           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIwLCJmaXJzdF9uYW1lIjoiQWxpIiwibGFzdF9uYW1lIjoieG14bSIsInBob25lX251bWJlciI6Iis5OTgyMjIyMjIyMjIiLCJ1c2VybmFtZSI6bnVsbCwiYnJhbmRzIjpbMTc2XSwiaWF0IjoxNjczOTQ4ODU3LCJleHAiOjE2NzY1NDA4NTd9.eJNmz3x_VG72_vUAn2Qdw9dBjHAbdKc2ZY4sxadPPZ8",
@@ -26,7 +28,7 @@ export const Search = () => {
 
   useEffect(() => {
     getProducts();
-  }, [search]);
+  }, [search, getProducts]);
 
   const isData = () => {
     if (product?.length < 1) {

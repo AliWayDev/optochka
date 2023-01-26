@@ -8,14 +8,6 @@ import { useParams } from "react-router";
 import axios from "axios";
 import { Loader } from "../../components/Loader/Loader";
 
-const links = [
-  "https://static01.nyt.com/images/2013/09/22/magazine/22wmt/22wmt-superJumbo-v2.jpg",
-  "https://static01.nyt.com/images/2013/09/22/magazine/22wmt/22wmt-superJumbo-v2.jpg",
-  "https://static01.nyt.com/images/2013/09/22/magazine/22wmt/22wmt-superJumbo-v2.jpg",
-  "https://static01.nyt.com/images/2013/09/22/magazine/22wmt/22wmt-superJumbo-v2.jpg",
-  "https://static01.nyt.com/images/2013/09/22/magazine/22wmt/22wmt-superJumbo-v2.jpg",
-];
-
 const catalogs = [
   {
     id: 1,
@@ -60,12 +52,6 @@ export const InnerProduct = () => {
   const { id } = useParams();
   let [product, setProduct] = useState(1);
 
-  let mock = {
-    title: "Browse premium related images on iStock",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident",
-  };
-
   let mainRef = useRef();
   let thumbsRef = useRef();
 
@@ -92,11 +78,11 @@ export const InnerProduct = () => {
 
   useEffect(() => {
     getProduct();
-  }, []);
+  }, [getProduct]);
 
   const renderSlides = product?.media?.map((links) => (
     <SplideSlide>
-      <img className="inner-img" src={links} alt="Image 1" />
+      <img className="inner-img" src={links} alt={links} />
     </SplideSlide>
   ));
 
