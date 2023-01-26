@@ -1,0 +1,21 @@
+.layout {
+  width: 100vw;
+  height: 100vh;
+
+  .container {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    max-width: 600px;
+    min-height: 100%;
+    margin: 0 auto;
+    background-color: #0e1621;
+  }
+
+  &-content {
+    margin-top: 60px;
+    padding: 0 10px;
+  }
+}
