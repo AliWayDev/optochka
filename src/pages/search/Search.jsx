@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { HiSearch } from "react-icons/hi";
+import { useParams } from "react-router";
 import { Layout } from "../../components/layout/Layout";
 import { ProductItem } from "../../components/product-item/ProductItem";
 import "../search/Search.scss";
@@ -9,7 +10,7 @@ export const Search = () => {
   const [product, setProduct] = useState([]);
   const [search, setSearch] = useState("");
 
-  const brandId = localStorage.getItem('brand')
+  const { brandId } = useParams();
 
   const getProducts = async () => {
     const config = {
@@ -28,7 +29,7 @@ export const Search = () => {
 
   useEffect(() => {
     getProducts();
-  }, [search, getProducts]);
+  }, [search]);
 
   const isData = () => {
     if (product?.length < 1) {

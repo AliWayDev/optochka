@@ -78,7 +78,7 @@ export const InnerProduct = () => {
 
   useEffect(() => {
     getProduct();
-  }, [getProduct]);
+  }, []);
 
   const renderSlides = product?.media?.map((links) => (
     <SplideSlide>

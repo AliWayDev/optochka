@@ -7,6 +7,7 @@ export const Top = () => {
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   const [search, setSearch] = useState(false);
+  const brand = localStorage.getItem("brand");
 
   useEffect(() => {
     if (window.location.pathname !== "/") {
@@ -44,7 +45,7 @@ export const Top = () => {
         {search && (
           <div
             className="top-search"
-            onClick={() => navigate("/products/search")}
+            onClick={() => navigate(`/products/search/${brand}`)}
           >
             <HiSearch size="25px" />
           </div>

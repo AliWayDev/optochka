@@ -27,7 +27,7 @@ export const Product = () => {
 
   useEffect(() => {
     getProducts();
-  }, [getProducts]);
+  }, []);
 
   if(product?.length < 1) {
     return (
