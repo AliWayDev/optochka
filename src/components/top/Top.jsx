@@ -26,8 +26,10 @@ export const Top = () => {
 
   useEffect(() => {
     if (boolean === "true") {
+      setSearch(false)
       setDisabled(false);
     } else {
+      setSearch(true)
       setDisabled(true);
     }
   });
