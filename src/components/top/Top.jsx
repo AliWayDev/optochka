@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { HiChevronDoubleLeft, HiSearch, HiShoppingCart } from "react-icons/hi";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import "../top/Top.scss";
 
 export const Top = () => {
@@ -8,6 +8,7 @@ export const Top = () => {
   const [disabled, setDisabled] = useState(false);
   const [search, setSearch] = useState(false);
   const brand = localStorage.getItem("brand");
+  const { boolean } = useParams();
 
   useEffect(() => {
     if (window.location.pathname !== "/") {
@@ -22,6 +23,14 @@ export const Top = () => {
       setSearch(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (boolean === "true") {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  });
 
   const setStyle = () => {
     if (!disabled) {
@@ -45,7 +54,7 @@ export const Top = () => {
         {search && (
           <div
             className="top-search"
-            onClick={() => navigate(`/products/search/${brand}`)}
+            onClick={() => navigate(`/products/search/${brand}/false`)}
           >
             <HiSearch size="25px" />
           </div>
