@@ -26,10 +26,10 @@ export const Top = () => {
 
   useEffect(() => {
     if (boolean === "true") {
-      setSearch(false)
+      setSearch(false);
       setDisabled(false);
     } else {
-      setSearch(true)
+      setSearch(true);
       setDisabled(true);
     }
   });
@@ -61,7 +61,7 @@ export const Top = () => {
             <HiSearch size="25px" />
           </div>
         )}
-        <div className="top-basket">
+        <div className="top-basket" onClick={() => navigate("/basket")}>
           <HiShoppingCart size="25px" />
           <span className="top-dot">3</span>
         </div>

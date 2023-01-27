@@ -1,0 +1,84 @@
+.inner-basket {
+  display: flex;
+  justify-content: space-between;
+
+  color: #fff;
+  background-color: #242f3d;
+  border-radius: 7px;
+
+  margin-bottom: 10px;
+  padding: 10px 10px;
+
+  img {
+    width: 105px;
+    height: 104px;
+
+    border-radius: 7px;
+    object-fit: cover;
+  }
+
+  &-title {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 600;
+    gap: 10px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    padding-left: 20px;
+  }
+
+  &-sub {
+    margin-top: 0;
+    font-size: 12px;
+    padding-left: 20px;
+    font-weight: 400;
+  }
+
+  &-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin-right: 25px;
+  }
+
+  &-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 20px;
+
+    margin-top: 30px;
+  }
+
+  &-icon {
+    color: #fff;
+
+    cursor: pointer;
+  }
+
+  &-sum {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  &-cost {
+    display: flex;
+    align-items: center;
+
+    padding-left: 20px;
+    gap: 20px;
+
+    &-el {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      font-size: 14px;
+    }
+  }
+}
