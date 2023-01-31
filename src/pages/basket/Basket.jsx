@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import { HiShoppingCart } from "react-icons/hi";
+import { useNavigate } from "react-router";
 import { BasketItem } from "../../components/basket-item/BasketItem";
 import { Layout } from "../../components/layout/Layout";
 import { StoreContext } from "../../utils/store";
@@ -10,7 +12,8 @@ function add(accumulator, a) {
 }
 
 export const Basket = () => {
-  const { cart, summ, notify } = useContext(StoreContext);
+  const { cart, summ } = useContext(StoreContext);
+  const navigate = useNavigate();
   const [el, setEl] = useState([]);
   const [sum, setSum] = useState([]);
 
@@ -47,9 +50,11 @@ export const Basket = () => {
     summ.setSum(sum.reduce(add, 0));
   }, [sum]);
 
-  useEffect(() => {
-    notify.setNotify(true);
-  }, []);
+  const order = () => {
+    navigate(`/${localStorage.getItem("brand")}`);
+    alert("Yahu order is completed!");
+    window.location.reload();
+  };
 
   return (
     <Layout>
@@ -70,6 +75,13 @@ export const Basket = () => {
             el={el}
           />
         ))}
+
+        <div className="basket-button">
+          <button onClick={() => order()}>
+            <HiShoppingCart />
+            Total: {summ.sum}
+          </button>
+        </div>
       </div>
     </Layout>
   );

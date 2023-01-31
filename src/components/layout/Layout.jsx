@@ -6,27 +6,11 @@ import "../layout/Layout.scss";
 import { Top } from "../top/Top";
 
 export const Layout = ({ children }) => {
-  const { cart, summ, notify } = useContext(StoreContext);
+  const { cart, notify } = useContext(StoreContext);
   const navigate = useNavigate();
 
-  console.log(notify);
-
-  const urlSwitcher = () => {
-    if (window.location.pathname === "/basket") {
-      return `Total: ` + summ.sum;
-    } else {
-      return `Cart: ` + cart.cart?.length;
-    }
-  };
-
   const funcSwitcher = () => {
-    if (window.location.pathname !== "/basket") {
-      return navigate("/basket");
-    } else {
-      navigate(`/${localStorage.getItem("brand")}`);
-      alert("Yahu order is completed!");
-      return;
-    }
+    return navigate("/basket");
   };
 
   return (
@@ -34,12 +18,12 @@ export const Layout = ({ children }) => {
       <div className="container">
         <Top />
         <div className="layout-content">{children}</div>
-          <div className={notify.notify ? `layout-button avil` : `layout-button`}>
-            <button onClick={() => funcSwitcher()}>
-              <HiShoppingCart />
-              {urlSwitcher()}
-            </button>
-          </div>
+        <div className={notify.notify ? `layout-button avil` : `layout-button`}>
+          <button onClick={() => funcSwitcher()}>
+            <HiShoppingCart />
+            {`Cart: ` + cart.cart?.length}
+          </button>
+        </div>
       </div>
     </div>
   );

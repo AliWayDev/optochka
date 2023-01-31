@@ -116,8 +116,8 @@ export const InnerProduct = () => {
     notify.setNotify(true);
 
     setTimeout(() => {
-      notify.setNotify(false)
-    }, [2000])
+      notify.setNotify(false);
+    }, [2000]);
 
     let productItem = {
       product_id: id,

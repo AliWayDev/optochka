@@ -8,31 +8,19 @@ export const Top = () => {
   const [disabled, setDisabled] = useState(false);
   const [search, setSearch] = useState(false);
   const brand = localStorage.getItem("brand");
-  const { boolean } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
-    if (window.location.pathname !== "/") {
+    if (id?.length > 1) {
       setDisabled(true);
     } else {
       setDisabled(false);
     }
 
-    if (window.location.pathname !== "/products/search") {
-      setSearch(true);
-    } else {
-      setSearch(false);
+    if (window.location.pathname === "/basket") {
+      setDisabled(true);
     }
   }, []);
-
-  useEffect(() => {
-    if (boolean === "true") {
-      setSearch(false);
-      setDisabled(false);
-    } else {
-      setSearch(true);
-      setDisabled(true);
-    }
-  });
 
   const setStyle = () => {
     if (!disabled) {
@@ -53,14 +41,12 @@ export const Top = () => {
         Molly’s Shop
       </div>
       <div className="top-right">
-        {search && (
-          <div
-            className="top-search"
-            onClick={() => navigate(`/products/search/${brand}/false`)}
-          >
-            <HiSearch size="25px" />
-          </div>
-        )}
+        <div
+          className="top-search"
+          onClick={() => navigate(`/products/search/${brand}/false`)}
+        >
+          <HiSearch size="25px" />
+        </div>
         <div className="top-basket" onClick={() => navigate("/basket")}>
           <HiShoppingCart size="25px" />
           <span className="top-dot">3</span>
