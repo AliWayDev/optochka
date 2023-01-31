@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { HiChevronDoubleLeft, HiSearch, HiShoppingCart } from "react-icons/hi";
 import { useNavigate, useParams } from "react-router";
+import { StoreContext } from "../../utils/store";
 import "../top/Top.scss";
 
 export const Top = () => {
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
-  const [search, setSearch] = useState(false);
   const brand = localStorage.getItem("brand");
+  const { cart } = useContext(StoreContext);
   const { id } = useParams();
 
   useEffect(() => {
@@ -49,7 +50,7 @@ export const Top = () => {
         </div>
         <div className="top-basket" onClick={() => navigate("/basket")}>
           <HiShoppingCart size="25px" />
-          <span className="top-dot">3</span>
+          <span className="top-dot">{cart.cart?.length}</span>
         </div>
       </div>
     </div>
