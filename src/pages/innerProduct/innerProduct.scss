@@ -41,6 +41,7 @@
     gap: 10px;
 
     margin-top: 30px;
+    margin-bottom: 30px;
 
     div {
       display: flex;
@@ -65,7 +66,7 @@
     width: 100%;
     display: flex;
 
-    margin-top: 70px;
+    margin-top: 40px;
 
     button {
       display: flex;
@@ -83,12 +84,12 @@
       font-weight: 600;
       outline: none;
       border: none;
-      background-color: #5EB5F7;
+      background-color: #5eb5f7;
     }
   }
 }
 
 .splide__slide is-visible is-active {
   border-radius: 7px !important;
-  border-color: #5EB5F7 !important;
+  border-color: #5eb5f7 !important;
 }
