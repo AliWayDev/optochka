@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Layout } from "../../components/layout/Layout";
 
 import { Splide, SplideSlide } from "@splidejs/react-splide";
@@ -7,25 +7,7 @@ import { HiCheckCircle, HiShoppingCart } from "react-icons/hi";
 import { useParams } from "react-router";
 import axios from "axios";
 import { Loader } from "../../components/Loader/Loader";
-
-const catalogs = [
-  {
-    id: 1,
-    name: "S",
-  },
-  {
-    id: 2,
-    name: "M",
-  },
-  {
-    id: 3,
-    name: "L",
-  },
-  {
-    id: 4,
-    name: "XL",
-  },
-];
+import { StoreContext } from "../../utils/store";
 
 const mainOptions = {
   type: "loop",
@@ -50,7 +32,13 @@ const thumbsOptions = {
 
 export const InnerProduct = () => {
   const { id } = useParams();
-  let [product, setProduct] = useState(1);
+  const { cart } = useContext(StoreContext);
+  const [product, setProduct] = useState(1);
+  const [sizeId, setSizeId] = useState();
+  const [disabled, setDisabled] = useState(false);
+
+  const [variations] = useState(product?.variations);
+  const [size, setSize] = useState([]);
 
   let mainRef = useRef();
   let thumbsRef = useRef();
@@ -73,12 +61,38 @@ export const InnerProduct = () => {
 
     await axios(config).then((res) => {
       setProduct(res.data);
+
+      const config = {
+        method: "post",
+        url: `https://dev-upost.mollys.uz/products-variations/find-many-by-ids`,
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIwLCJmaXJzdF9uYW1lIjoiQWxpIiwibGFzdF9uYW1lIjoieG14bSIsInBob25lX251bWJlciI6Iis5OTgyMjIyMjIyMjIiLCJ1c2VybmFtZSI6bnVsbCwiYnJhbmRzIjpbMTc2XSwiaWF0IjoxNjczOTQ4ODU3LCJleHAiOjE2NzY1NDA4NTd9.eJNmz3x_VG72_vUAn2Qdw9dBjHAbdKc2ZY4sxadPPZ8",
+        },
+        data: { ids: res.data.variations },
+      };
+
+      axios(config).then((res) => {
+        setSize(res.data);
+      });
     });
   };
 
   useEffect(() => {
     getProduct();
   }, []);
+
+  useEffect(() => {
+    for (let i = 0; i < cart.cart.length; i++) {
+      if (cart.cart[i].product_id === id) {
+        setDisabled(true);
+      }
+    }
+  }, [cart, id]);
+
+  // useEffect(() => {
+
+  // }, [product?.variations]);
 
   const renderSlides = product?.media?.map((links) => (
     <SplideSlide>
@@ -87,12 +101,26 @@ export const InnerProduct = () => {
   ));
 
   const style = (el) => {
-    return el.id === id
+    return el.id === sizeId
       ? { backgroundColor: "#5EB5F7" }
       : { backgroundColor: "#17212B" };
   };
 
-  const catalogHandler = (id) => {};
+  const catalogHandler = (id) => {
+    setSizeId(null);
+
+    setSizeId(id);
+  };
+
+  const submitHandler = () => {
+    let productItem = {
+      product_id: id,
+      quantity: 1,
+      price: product.price,
+    };
+
+    cart.setCart((prev) => [...prev, productItem]);
+  };
 
   if (!product?.media?.length > 0) {
     return <Loader />;
@@ -125,23 +153,25 @@ export const InnerProduct = () => {
           <p className="inner-sub">{product?.description}</p>
 
           <div className="inner-catalogs">
-            {catalogs.map((el) => (
+            {size?.map((el) => (
               <div
                 key={el.id}
                 style={style(el)}
                 onClick={() => catalogHandler(el?.id)}
+                className="inner-size"
               >
-                <HiCheckCircle /> <p>{el.name}</p>
+                <HiCheckCircle /> <p>{el?.name}</p>
               </div>
             ))}
           </div>
         </div>
-
-        <div className="inner-button">
-          <button>
-            <HiShoppingCart /> Add to Cart{" "}
-          </button>
-        </div>
+        {!disabled && (
+          <div className="inner-button" onClick={() => submitHandler()}>
+            <button>
+              <HiShoppingCart /> Add to Cart{" "}
+            </button>
+          </div>
+        )}
       </div>
     </Layout>
   );

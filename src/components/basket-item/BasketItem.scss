@@ -51,8 +51,6 @@
     gap: 10px;
 
     font-size: 20px;
-
-    margin-top: 30px;
   }
 
   &-icon {
@@ -80,5 +78,37 @@
 
       font-size: 14px;
     }
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .inner-basket {
+    flex-direction: column;
+    padding-bottom: 20px;
+    text-align: center;
+  }
+
+  .inner-basket img {
+    width: 100%;
+    min-height: 200px;
+  }
+
+  .inner-basket-title {
+    flex-direction: column;
+    padding-left: 0;
+  }
+
+  .inner-basket-sub {
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .inner-basket-cost {
+    justify-content: center;
+    padding-left: 0;
+  }
+  
+  .inner-basket-content {
+    margin-right: 0;
   }
 }

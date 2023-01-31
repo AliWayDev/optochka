@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   HiChevronRight,
   HiCurrencyDollar,
@@ -6,30 +6,58 @@ import {
   HiPlus,
   HiShoppingCart,
 } from "react-icons/hi";
+import { StoreContext } from "../../utils/store";
 import "../basket-item/BasketItem.scss";
 
 export const BasketItem = ({
   title = "xmxm",
   id,
-  sale = "0",
+  index,
   description = "xmxm",
   cost = 300,
   img,
+  el,
+  setEl,
 }) => {
+  const { cart } = useContext(StoreContext);
+
+  const add = () => {
+    let newArr = [...cart.cart];
+
+    newArr[id] = {
+      ...newArr[id],
+      quantity: newArr[id].quantity + 1,
+    };
+
+    cart.setCart(newArr);
+  };
+
+  const inc = () => {
+    if (cart.cart[id].quantity === 1) {
+      cart.setCart(
+        cart.cart.filter((item) => item.product_id !== index.toString())
+      );
+      setEl(el.filter((item) => item.id !== index));
+      return;
+    }
+
+    let newArr = [...cart.cart];
+    newArr[id] = {
+      ...newArr[id],
+      quantity: newArr[id].quantity - 1,
+    };
+
+    cart.setCart(newArr);
+  };
+
   return (
     <div className="inner-basket">
       <div className="inner-basket-title">
-        <img
-          src="https://media.gq.com/photos/6256dc8bd799f7841ada56e9/master/w_2000,h_1333,c_limit/shirt.jpg"
-          alt="product"
-        />
+        <img src={img} alt="product" />
         <div>
           <p className="inner-basket-title">{title.slice(0, 38)}</p>
           <p className="inner-basket-sub">{description.slice(0, 52)}...</p>
           <div className="inner-basket-cost">
-            <p className="inner-basket-cost-el">
-              <HiShoppingCart size="25px" /> {sale}
-            </p>
             <p className="inner-basket-cost-el">
               <HiCurrencyDollar size="25px" /> {cost}
             </p>
@@ -39,11 +67,20 @@ export const BasketItem = ({
 
       <div className="inner-basket-content">
         <div className="inner-basket-count">
-          <HiPlus className="inner-basket-icon" size="30px" color="#5EB5F7" />
-          0
-          <HiMinus className="inner-basket-icon" size="30px" color="#5EB5F7" />
+          <HiPlus
+            className="inner-basket-icon"
+            size="30px"
+            color="#5EB5F7"
+            onClick={() => add()}
+          />
+          {cart.cart[id]?.quantity}
+          <HiMinus
+            className="inner-basket-icon"
+            size="30px"
+            color="#5EB5F7"
+            onClick={() => inc()}
+          />
         </div>
-        <p className="inner-basket-sum">240 K</p>
       </div>
     </div>
   );
