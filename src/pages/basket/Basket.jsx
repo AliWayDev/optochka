@@ -10,7 +10,7 @@ function add(accumulator, a) {
 }
 
 export const Basket = () => {
-  const { cart, summ } = useContext(StoreContext);
+  const { cart, summ, notify } = useContext(StoreContext);
   const [el, setEl] = useState([]);
   const [sum, setSum] = useState([]);
 
@@ -46,6 +46,10 @@ export const Basket = () => {
   useEffect(() => {
     summ.setSum(sum.reduce(add, 0));
   }, [sum]);
+
+  useEffect(() => {
+    notify.setNotify(true);
+  }, []);
 
   return (
     <Layout>
