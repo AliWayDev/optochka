@@ -21,7 +21,9 @@ export const Layout = ({ children }) => {
     if (window.location.pathname !== "/basket") {
       return navigate("/basket");
     } else {
-      return alert("Yahu order is completed!");
+      navigate(`/${localStorage.getItem("brand")}`);
+      alert("Yahu order is completed!");
+      return;
     }
   };
 
