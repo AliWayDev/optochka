@@ -7,7 +7,7 @@ body {
   box-sizing: border-box;
   overflow-x: hidden;
   background-color: #000;
-  overflow: overlay;
+  overflow-y: hidden;
 }
 
 ::-webkit-scrollbar {

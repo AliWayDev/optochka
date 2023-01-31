@@ -27,6 +27,8 @@
   &-button {
     position: absolute;
     bottom: 0;
+    transform: translateY(100px);
+    transition: 0.3s;
 
     width: 100%;
     display: flex;
@@ -50,7 +52,11 @@
       font-weight: 600;
       outline: none;
       border: none;
-      background-color: #5EB5F7;
+      background-color: #5eb5f7;
     }
+  }
+
+  .avil {
+    transform: translateY(0);
   }
 }

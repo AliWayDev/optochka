@@ -32,7 +32,7 @@ const thumbsOptions = {
 
 export const InnerProduct = () => {
   const { id } = useParams();
-  const { cart } = useContext(StoreContext);
+  const { cart, notify } = useContext(StoreContext);
   const [product, setProduct] = useState(1);
   const [sizeId, setSizeId] = useState();
   const [disabled, setDisabled] = useState(false);
@@ -113,6 +113,12 @@ export const InnerProduct = () => {
   };
 
   const submitHandler = () => {
+    notify.setNotify(true);
+
+    setTimeout(() => {
+      notify.setNotify(false)
+    }, [2000])
+
     let productItem = {
       product_id: id,
       quantity: 1,
